@@ -11,6 +11,8 @@ import { InscriptionComponent } from './component/inscription/inscription.compon
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { MainComponent } from './component/main/main.component';
+import { FormulairePassagerComponent } from './component/formulaire-passager/formulaire-passager.component';
+
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { MainComponent } from './component/main/main.component';
     StartComponent,
     HeaderComponent,
     InscriptionComponent,
-    MainComponent
+    MainComponent,
+    FormulairePassagerComponent,
+    
   ],
   imports: [
     BrowserModule,

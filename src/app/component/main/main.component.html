@@ -1,1 +1,38 @@
-<p>main works!</p>
+<div *ngIf="type=='passager'">
+  <div class="d-flex justify-content-center mt-3">
+    <div class="card w-50">
+      <div class="text-center">
+        <h2> Bonjour Passager </h2>
+        <p>Que souhaitez vous faire:</p>
+      </div>
+      <div class="d-flex justify-content-between m-4">
+        <button type="button" class="btn btn-primary">Faire une course</button>
+        <button type="button" class="btn btn-success">Voir mes courses</button>
+        <button type="button" class="btn btn-danger" (click)="deconnect()">Deconnexion</button>
+      </div>
+  </div>
+
+
+  </div>
+</div>
+
+<div *ngIf="type=='conducteur'">
+  <div class="d-flex justify-content-center mt-3">
+    <div class="card w-50">
+      <div class="text-center">
+        <h2> Bonjour Conducteur </h2>
+        <p>Que souhaitez vous faire:</p>
+      </div>
+      <div class="d-flex justify-content-between m-4">
+        <button type="button" class="btn btn-primary" > Accepter une course  <span class="badge text-bg-secondary">4</span></button>
+        <button type="button" class="btn btn-success">Voir mes courses</button>
+        <button type="button" class="btn btn-danger" (click)="deconnect()">Deconnexion</button>
+      </div>
+  </div>
+</div>
+
+<div *ngIf="type==  null" >
+  <p> Bonjour Testeur tu t'es perdu je pense </p>
+  <a routerLink="/acceuil">Retour</a>
+</div>
+

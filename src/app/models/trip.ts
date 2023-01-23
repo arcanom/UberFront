@@ -4,4 +4,7 @@ export interface Trip {
   end:string,
   state:string,
   price:number
+  passager:number
+  driver:number
+  message:string
 }

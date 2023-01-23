@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HeaderService } from 'src/app/service/header.service';
+import { StorageService } from 'src/app/service/storage.service';
 
 @Component({
   selector: 'app-start',
@@ -13,7 +14,7 @@ export class StartComponent implements OnInit {
   titre: string = "Bienvenue sur Uber"
 
 
-  constructor(private fb : FormBuilder, private route : Router, private headerService : HeaderService) {
+  constructor(private fb : FormBuilder, private route : Router, private headerService : HeaderService, private storageService: StorageService) {
     this.headerService.changeTitre(this.titre)
   }
 
@@ -32,11 +33,13 @@ export class StartComponent implements OnInit {
     return this.form.get("type")
   }
 
+  
+
   submit(){
     if(this.form.valid){
-      if(this.form.value.type == "passager"){
-        localStorage.setItem('type', this.form.value.type);
-      }
+        this.storageService.set(this.form.value.type)
+        this.route.navigate(['/main'])
+
     }
   }
 

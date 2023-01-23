@@ -30,12 +30,17 @@
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" formControlName="type" name="type" value="conducteur" id="flexRadioDefault2" checked>
+              <input class="form-check-input" type="radio" formControlName="type" name="type" value="conducteur" id="flexRadioDefault2" >
               <label class="form-check-label" for="flexRadioDefault2">
                Conducteur
               </label>
             </div>
+
           </div>
+          <div *ngIf="type!.value =='conducteur'" class="d-flex justify-content-around mb-3">
+            <label for="" class="form-label"> Type de Voiture</label>
+            <input type="text" class="form-control" formControlName="voiture">
+        </div>
           <div class="text-center mt-3 mb-3">
             <button type="submit" class="btn btn-primary"> S'inscrire</button>
           </div>
