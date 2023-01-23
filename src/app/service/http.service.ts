@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { PassengerDTO } from '../models/passenger-dto';
 import { Passenger } from '../models/passenger';
 import { DriverDTO } from '../models/driver-dto';
+import { TripDto } from '../models/trip-dto';
 @Injectable({
   providedIn: 'root'
 })
@@ -19,13 +20,18 @@ createPassager(passenger: PassengerDTO):Observable<any>{
 }
 
 
-getPassagerByEmail():Observable<Passenger>{
+getPassagerByEmail(email:string):Observable<Passenger>{
   return this.http.get(this.url)
 }
 
 createDriver(driver: DriverDTO):Observable<any>{
   return this.http.post(this.url+"driver",driver)
 }
+
+createTrip(trip:TripDto):Observable<any>{
+  return this.http.post(this.url+"trip",trip)
+}
+
 
 
 }

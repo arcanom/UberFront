@@ -1,7 +1,8 @@
 export interface TripDto {
 
-  start:string,
-  end:string,
+  adressStart:string,
+  adressEnd:string,
   price:number
-
+  passager: number
+  driver: number
 }

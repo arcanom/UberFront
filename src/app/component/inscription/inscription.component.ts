@@ -54,6 +54,7 @@ export class InscriptionComponent implements OnInit {
     if(this.form.valid){
 
       if(this.form.value.type == "passager" ){
+        
         this.passager =  {
           email : this.form.value.email
         }

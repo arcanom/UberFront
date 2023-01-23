@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TripDto } from 'src/app/models/trip-dto';
 import { HeaderService } from 'src/app/service/header.service';
+import { HttpService } from 'src/app/service/http.service';
 import { StorageService } from 'src/app/service/storage.service';
 
 @Component({
@@ -15,7 +16,7 @@ export class FormulairePassagerComponent implements OnInit {
   titre:string="Journal de Bord (Passager)"
   trip !: TripDto
 
-  constructor( private headerService: HeaderService, private route: Router, private fb: FormBuilder) {
+  constructor( private headerService: HeaderService, private route: Router, private fb: FormBuilder, private httpClient: HttpService) {
     this.headerService.changeTitre(this.titre)
    }
 
@@ -36,13 +37,23 @@ export class FormulairePassagerComponent implements OnInit {
   }
 
   get price(){
-    return this.form.get("end")
+    return this.form.get("price")
   }
 
 
   submit(){
       if(this.form.valid){
-          this.trip = this.form.value
+
+          this.trip = {
+            adressStart: this.form.value.start,
+            adressEnd: this.form.value.end,
+            price: this.form.value.price,
+            passager:0,
+            driver: 0
+          }
+          this.httpClient.createTrip(this.trip).subscribe(x=>{
+            console.log(x)
+          })
           this.route.navigate(['/main'])
       }
   }
