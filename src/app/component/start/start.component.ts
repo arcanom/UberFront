@@ -33,11 +33,12 @@ export class StartComponent implements OnInit {
     return this.form.get("type")
   }
 
-  
+
 
   submit(){
     if(this.form.valid){
         this.storageService.set(this.form.value.type)
+        this.storageService.setEmail(this.form.value.email)
         this.route.navigate(['/main'])
 
     }

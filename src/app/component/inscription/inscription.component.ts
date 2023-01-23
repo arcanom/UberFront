@@ -6,6 +6,7 @@ import { DriverDTO } from 'src/app/models/driver-dto';
 import { Passenger } from 'src/app/models/passenger';
 import { PassengerDTO } from 'src/app/models/passenger-dto';
 import { HeaderService } from 'src/app/service/header.service';
+import { HttpService } from 'src/app/service/http.service';
 
 @Component({
   selector: 'app-inscription',
@@ -18,7 +19,7 @@ export class InscriptionComponent implements OnInit {
   passager !: PassengerDTO
   conducteur !: DriverDTO
   isExist : boolean = false
-  constructor( private headerService : HeaderService,private fb : FormBuilder, private route : Router,) {
+  constructor( private headerService : HeaderService,private fb : FormBuilder, private route : Router, private http : HttpService) {
     this.headerService.changeTitre(this.titre)
 
    }
@@ -56,13 +57,20 @@ export class InscriptionComponent implements OnInit {
         this.passager =  {
           email : this.form.value.email
         }
+        this.http.createPassager(this.passager).subscribe(x =>{
+          console.log(x)
+        })
         // console.log(this.passager)
          this.route.navigate(['/acceuil'])
       } else{
           this.conducteur =  {
             email: this.form.value.email,
-            voiture: this.form.value.voiture
+            car: this.form.value.voiture
           }
+          this.http.createDriver(this.conducteur).subscribe(x=>{
+            console.log(x)
+          })
+
           // console.log(this.conducteur)
           this.route.navigate(['/acceuil'])
       }

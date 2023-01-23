@@ -12,6 +12,8 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { MainComponent } from './component/main/main.component';
 import { FormulairePassagerComponent } from './component/formulaire-passager/formulaire-passager.component';
+import { CourseComponent } from './component/course/course.component';
+import { AcceptCourseComponent } from './component/accept-course/accept-course.component';
 
 
 @NgModule({
@@ -22,6 +24,8 @@ import { FormulairePassagerComponent } from './component/formulaire-passager/for
     InscriptionComponent,
     MainComponent,
     FormulairePassagerComponent,
+    CourseComponent,
+    AcceptCourseComponent,
     
   ],
   imports: [

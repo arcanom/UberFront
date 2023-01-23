@@ -19,4 +19,16 @@ export class StorageService {
   remove(){
     localStorage.removeItem("type")
   }
+
+  getEmail(){
+    return localStorage.getItem("email")
+  }
+
+  setEmail(email: any ){
+    localStorage.setItem("email",email)
+  }
+
+  removeEmail(){
+    localStorage.removeItem("email")
+  }
 }

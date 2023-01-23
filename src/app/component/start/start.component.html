@@ -3,16 +3,16 @@
 <div>
   <div class="d-flex justify-content-center ">
 
-      <div class="card w-50">
+      <div class="card w-50 p-2">
 
         <div class="text-center">
           <h2>Connexion</h2>
         </div>
 
         <form action="" [formGroup]="form"  (ngSubmit)="submit()">
-          <div class="d-flex justify-content-around mb-3">
+          <div class="d-flex justify-content-around mb-3 ">
             <label for="" class="form-label"> Email</label>
-            <input type="email" class="form-control w-50" formControlName="email">
+            <input type="email" class="form-control w-50 " formControlName="email">
           </div>
             <div *ngIf="email!.invalid && email!.touched" class="text-danger text-center">
               <div *ngIf="email!.errors?.['required']">

@@ -31,6 +31,7 @@ export class MainComponent implements OnInit {
 
   deconnect(){
     this.storageService.remove()
+    this.storageService.removeEmail()
     this.route.navigate(['/acceuil'])
   }
 
