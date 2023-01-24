@@ -21,11 +21,30 @@ export class HeaderComponent implements OnInit {
       console.log("conducteur");
       this.headerService.changeTitre(this.titre)
 
+
     }else{
       console.log("rien");
+      this.headerService.changeTitre(this.titre)
 
     }
 
+   }
+   ngDoCheck(){
+    this.type=this.storageService.get()
+    if(this.type == "passager"){
+      console.log("passager");
+      this.headerService.changeTitre(this.titre)
+
+    }else if(this.type == "conducteur"){
+      console.log("conducteur");
+      this.headerService.changeTitre(this.titre)
+
+
+    }else{
+      console.log("rien");
+      this.headerService.changeTitre(this.titre)
+
+    }
    }
 
   ngOnInit(): void {
