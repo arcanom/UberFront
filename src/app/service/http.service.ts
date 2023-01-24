@@ -37,6 +37,45 @@ createTrip(trip:TripDto):Observable<any>{
   return this.http.post(this.url+"trip",trip)
 }
 
+getTripsCreated():Observable<any>{
+  return this.http.get(this.url+"trip/status/CREATED")
+}
 
+getTripsValidated():Observable<any>{
+  return this.http.get(this.url+"trip/status/VALIDATED")
+}
+
+getTripsInProgress():Observable<any>{
+  return this.http.get(this.url+"trip/status/INPROGRESS")
+}
+
+getTripsFinished():Observable<any>{
+  return this.http.get(this.url+"trip/status/FINISHED")
+}
+
+getTripsPaid():Observable<any>{
+  return this.http.get(this.url+"trip/status/PAID")
+}
+
+getTripsCanceled():Observable<any>{
+  return this.http.get(this.url+"trip/status/CANCELED")
+}
+
+updateTripStatus(id:number, state:any):Observable<any>{
+  return this.http.patch(this.url+"trip/"+id,state)
+}
+
+updateTripDriver(id:number,idDriver:number):Observable<any>{
+
+  return this.http.put(this.url+"trip/"+id+"/driver/"+idDriver,idDriver)
+}
+
+
+getTripsByPassager(id:number){
+  return this.http.get(this.url+"trip/passenger/"+id)
+}
+getTripsByDriver(id:number){
+  return this.http.get(this.url+"trip/driver/"+id)
+}
 
 }

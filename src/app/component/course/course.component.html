@@ -1,66 +1,187 @@
-<div>
-  <h2>En cours </h2>
+<div *ngIf="type=='passager'">
+  <div>
+    <h2>En cours d'acceptation</h2>
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Adresse de départ</th>
+        <th scope="col">Adresse d'arrivée</th>
+        <th scope="col">Prix</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let trip of trips">
+        <th scope="row" *ngIf="trip.state=='CREATED'">{{trip.id}}</th>
+        <td *ngIf="trip.state=='CREATED'">{{trip.addressStart}}</td>
+        <td *ngIf="trip.state=='CREATED'">{{trip.addressEnd}}</td>
+        <td *ngIf="trip.state=='CREATED'" >{{trip.price}}</td>
+        <td *ngIf="trip.state=='CREATED'"> <button type="button" class="btn btn-danger" (click)="changeStatusToCanceled(trip.id)">Annuler</button>  </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div>
+    <h2>Validé(s)</h2>
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Adresse de départ</th>
+        <th scope="col">Adresse d'arrivée</th>
+        <th scope="col">Prix</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let trip of trips">
+        <th scope="row" *ngIf="trip.state=='VALIDATED'">{{trip.id}}</th>
+        <td *ngIf="trip.state=='VALIDATED'">{{trip.addressStart}}</td>
+        <td *ngIf="trip.state=='VALIDATED'">{{trip.addressEnd}}</td>
+        <td *ngIf="trip.state=='VALIDATED'" >{{trip.price}}</td>
+        <td *ngIf="trip.state=='VALIDATED'"> <button type="button" (click)="changeStatusValidatedToInProgress(trip.id)" class="btn btn-success">Accepter</button> <button type="button" class="btn btn-danger" (click)="changeStatusToCanceled(trip.id)" >Annuler</button>  </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div>
+    <h2>En cours</h2>
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Adresse de départ</th>
+        <th scope="col">Adresse d'arrivée</th>
+        <th scope="col">Prix</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let trip of trips">
+        <th scope="row" *ngIf="trip.state=='INPROGRESS'">{{trip.id}}</th>
+        <td *ngIf="trip.state=='INPROGRESS'">{{trip.addressStart}}</td>
+        <td *ngIf="trip.state=='INPROGRESS'">{{trip.addressEnd}}</td>
+        <td *ngIf="trip.state=='INPROGRESS'" >{{trip.price}}</td>
+        <td *ngIf="trip.state=='INPROGRESS'"> <button type="button" class="btn btn-success" (click)="changeStatusInProgressToFinished(trip.id)" >Accepter</button>  </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div>
+    <h2>Terminé(s)</h2>
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Adresse de départ</th>
+        <th scope="col">Adresse d'arrivée</th>
+        <th scope="col">Prix</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let trip of trips">
+        <th scope="row" *ngIf="trip.state=='FINISHED'">{{trip.id}}</th>
+        <td *ngIf="trip.state=='FINISHED'">{{trip.addressStart}}</td>
+        <td *ngIf="trip.state=='FINISHED'">{{trip.addressEnd}}</td>
+        <td *ngIf="trip.state=='FINISHED'" >{{trip.price}}</td>
+        <td *ngIf="trip.state=='FINISHED'"> <button type="button" class="btn btn-success" (click)="changeStatusFinishedToPaid(trip.id)">Payer</button>  </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div>
+    <h2> Paiement(s)</h2>
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Adresse de départ</th>
+        <th scope="col">Adresse d'arrivée</th>
+        <th scope="col">Prix</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let trip of trips">
+        <th scope="row" *ngIf="trip.state=='PAID'">{{trip.id}}</th>
+        <td *ngIf="trip.state=='PAID'">{{trip.addressStart}}</td>
+        <td *ngIf="trip.state=='PAID'">{{trip.addressEnd}}</td>
+        <td *ngIf="trip.state=='PAID'" >{{trip.price}}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Adresse de départ</th>
-      <th scope="col">Adresse d'arrivée</th>
-      <th scope="col">Prix</th>
-      <th scope="col">Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-    </tr>
-  </tbody>
-</table>
-<div>
-  <h2>Terminés </h2>
+<div *ngIf="type=='conducteur'">
+  <div>
+    <h2>En cours</h2>
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Adresse de départ</th>
+        <th scope="col">Adresse d'arrivée</th>
+        <th scope="col">Prix</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let trip of tripsDriver">
+        <th scope="row" *ngIf="trip.state=='INPROGRESS'">{{trip.id}}</th>
+        <td *ngIf="trip.state=='INPROGRESS'">{{trip.addressStart}}</td>
+        <td *ngIf="trip.state=='INPROGRESS'">{{trip.addressEnd}}</td>
+        <td *ngIf="trip.state=='INPROGRESS'" >{{trip.price}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div>
+    <h2>Terminé(s)</h2>
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Adresse de départ</th>
+        <th scope="col">Adresse d'arrivée</th>
+        <th scope="col">Prix</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let trip of tripsDriver">
+        <th scope="row" *ngIf="trip.state=='FINISHED'">{{trip.id}}</th>
+        <td *ngIf="trip.state=='FINISHED'">{{trip.addressStart}}</td>
+        <td *ngIf="trip.state=='FINSIHED'">{{trip.addressEnd}}</td>
+        <td *ngIf="trip.state=='FINISHED'" >{{trip.price}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div>
+    <h2> Paiement(s)</h2>
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Adresse de départ</th>
+        <th scope="col">Adresse d'arrivée</th>
+        <th scope="col">Prix</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let trip of tripsDriver">
+        <th scope="row" *ngIf="trip.state=='PAID'">{{trip.id}}</th>
+        <td *ngIf="trip.state=='PAID'">{{trip.addressStart}}</td>
+        <td *ngIf="trip.state=='PAID'">{{trip.addressEnd}}</td>
+        <td *ngIf="trip.state=='PAID'" >{{trip.price}}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Adresse de départ</th>
-      <th scope="col">Adresse d'arrivée</th>
-      <th scope="col">Prix</th>
-      <th scope="col">Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-    </tr>
-  </tbody>
-</table>

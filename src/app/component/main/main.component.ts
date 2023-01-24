@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HeaderService } from 'src/app/service/header.service';
+import { HttpService } from 'src/app/service/http.service';
 import { StorageService } from 'src/app/service/storage.service';
 
 @Component({
@@ -10,8 +11,9 @@ import { StorageService } from 'src/app/service/storage.service';
 })
 export class MainComponent implements OnInit {
   type: any
+  number!: number
   titre:string=""
-  constructor(private storageService :  StorageService, private headerService: HeaderService, private route: Router) {
+  constructor(private storageService :  StorageService, private headerService: HeaderService, private route: Router, private http :HttpService) {
     this.type = this.storageService.get()
     if(this.type =="passager"){
       this.titre="Journal de Bord (Passager)"
@@ -25,7 +27,16 @@ export class MainComponent implements OnInit {
     }
   }
 
+  getNumberTrips(){
+    this.http.getTripsCreated().subscribe((trip)=>{
+      this.number =  trip.length
+
+    })
+  }
+
   ngOnInit(): void {
+
+    this.getNumberTrips()
 
   }
 

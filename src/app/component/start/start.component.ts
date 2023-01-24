@@ -14,7 +14,7 @@ export class StartComponent implements OnInit {
   form!: FormGroup;
   titre: string = "Bienvenue sur Uber"
   notExist: boolean = false
-  data : any
+  data : any =""
   constructor(private fb : FormBuilder, private route : Router, private headerService : HeaderService, private storageService: StorageService, private http:HttpService) {
     this.headerService.changeTitre(this.titre)
   }
@@ -54,8 +54,7 @@ export class StartComponent implements OnInit {
   }
 
   recoverDriverId(email:string){
-    this.http.getPassagerByEmail(email).subscribe((driver)=>{
-
+    this.http.getDriverByEmail(email).subscribe((driver)=>{
       this.storageService.setId(driver.id)
    })
   }
@@ -78,7 +77,7 @@ export class StartComponent implements OnInit {
       } else {
         this.getDriver(this.form.value.email)
         this.data = this.storageService.getEmail()
-        //console.log(this.data)
+        console.log(this.data)
         if(this.data !=  null){
           this.storageService.set(this.form.value.type)
           this.recoverDriverId(this.form.value.email)
