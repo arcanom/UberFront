@@ -46,11 +46,12 @@ export class FormulairePassagerComponent implements OnInit {
       if(this.form.valid){
         this.data =  this.storageService.getId()
           this.trip = {
-            adressStart: this.form.value.start,
-            adressEnd: this.form.value.end,
+            addressStart: this.form.value.start,
+            addressEnd: this.form.value.end,
             price: this.form.value.price,
-            passager_id:parseInt(this.data),
-            driver_id: 0
+            passenger:parseInt(this.data),
+            driver: 0,
+            state:"CREATED"
           }
           this.httpClient.createTrip(this.trip).subscribe(x=>{
             console.log(x)
