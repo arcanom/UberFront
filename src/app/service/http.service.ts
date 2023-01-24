@@ -30,7 +30,7 @@ createDriver(driver: DriverDTO):Observable<any>{
 }
 
 getDriverByEmail(email:string):Observable<any>{
-return this.http.get(this.url+"driver/search"+email)
+return this.http.get(this.url+"driver/search/"+email)
 }
 
 createTrip(trip:TripDto):Observable<any>{
