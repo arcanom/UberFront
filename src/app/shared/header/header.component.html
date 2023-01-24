@@ -1,17 +1,25 @@
 
-
-  <!-- <div class="container-fluid justify-content-center border-bottom  text-center">
-    <h1> {{titre}}</h1>
-  </div> -->
-
   <div class="d-flex mb-3"><nav class="navbar bg-body-tertiary">
     <div class="container-fluid ">
-      <a class="navbar-brand " href="#">
+      <div>
+      <a class="navbar-brand d-flex " [routerLink]="'/main'" *ngIf="type=='passager'|| type=='conducteur'">
         <img src="assets/picture/logo-ouioui.jpg" alt="picture" width="65" height="50" class="d-inline-block align-text-top">
-
+      <h4 class="justify-content-center  text-center p-2">Accueil</h4>
       </a>
+      <img src="assets/picture/logo-ouioui.jpg" alt="picture" width="65" height="50" class="d-inline-block align-text-top"  *ngIf="type!='passager' && type!='conducteur'">
+    </div>
+      <div class="justify-content-center  text-center  flex-fill">
       <h4 class="justify-content-center  text-center  flex-fill"> {{titre}}</h4>
-
+      <div  *ngIf="type=='passager'">
+      <a [routerLink]="'formulaire-passager'" class="p-2">Création de course(passager)</a>
+      <a [routerLink]="'course'" class="p-2">Voir les courses(passager)</a>
+    </div>
+    <div *ngIf="type=='conducteur'">
+      <a [routerLink]="'accept-course'" class="p-2">Course disponible(driver)</a>
+      <a [routerLink]="'course'" class="p-2">Voir mes courses(driver)</a>
+    </div>
+      <div *ngIf="type == ''"></div>
+</div>
 
     </div>
 
