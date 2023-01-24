@@ -31,4 +31,20 @@ export class StorageService {
   removeEmail(){
     localStorage.removeItem("email")
   }
+
+getId(){
+  return localStorage.getItem("id")
+}
+setId(id: any ){
+  localStorage.setItem("id",id)
+}
+
+removeId(){
+  localStorage.removeItem("id")
+}
+
+clear(){
+  localStorage.clear()
+}
+
 }

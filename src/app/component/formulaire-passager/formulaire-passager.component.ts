@@ -15,8 +15,9 @@ export class FormulairePassagerComponent implements OnInit {
   form!: FormGroup;
   titre:string="Journal de Bord (Passager)"
   trip !: TripDto
+  data!: any
 
-  constructor( private headerService: HeaderService, private route: Router, private fb: FormBuilder, private httpClient: HttpService) {
+  constructor( private headerService: HeaderService, private route: Router, private fb: FormBuilder, private httpClient: HttpService,private storageService:StorageService) {
     this.headerService.changeTitre(this.titre)
    }
 
@@ -43,13 +44,13 @@ export class FormulairePassagerComponent implements OnInit {
 
   submit(){
       if(this.form.valid){
-
+        this.data =  this.storageService.getId()
           this.trip = {
             adressStart: this.form.value.start,
             adressEnd: this.form.value.end,
             price: this.form.value.price,
-            passager:0,
-            driver: 0
+            passager_id:parseInt(this.data),
+            driver_id: 0
           }
           this.httpClient.createTrip(this.trip).subscribe(x=>{
             console.log(x)

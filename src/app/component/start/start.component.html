@@ -21,6 +21,9 @@
               <div *ngIf="email!.errors?.['pattern']">
                 <small>Un format email est requis avec extension fr et com</small>
               </div>
+              <div *ngIf="notExist == true">
+                <small>Compte inexistant</small>
+              </div>
             </div>
 
           <div class="form-control d-flex  justify-content-around">

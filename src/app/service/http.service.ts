@@ -5,6 +5,7 @@ import { PassengerDTO } from '../models/passenger-dto';
 import { Passenger } from '../models/passenger';
 import { DriverDTO } from '../models/driver-dto';
 import { TripDto } from '../models/trip-dto';
+import { Driver } from '../models/driver';
 @Injectable({
   providedIn: 'root'
 })
@@ -20,12 +21,16 @@ createPassager(passenger: PassengerDTO):Observable<any>{
 }
 
 
-getPassagerByEmail(email:string):Observable<Passenger>{
-  return this.http.get(this.url)
+ getPassagerByEmail(email:string):Observable<Passenger>{
+  return this.http.get(this.url + "passenger/search/" + email)
 }
 
 createDriver(driver: DriverDTO):Observable<any>{
   return this.http.post(this.url+"driver",driver)
+}
+
+getDriverByEmail(email:string):Observable<any>{
+return this.http.get(this.url+"driver/search"+email)
 }
 
 createTrip(trip:TripDto):Observable<any>{

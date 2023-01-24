@@ -20,7 +20,9 @@
                 <small>Un format email est requis avec extension fr et com</small>
               </div>
             </div>
-
+            <div *ngIf="isExist == true">
+              <small>Compte déjà crée avec ce mail</small>
+            </div>
           <div class="form-control d-flex  justify-content-around">
             <p> Etes vous un</p>
             <div class="form-check">

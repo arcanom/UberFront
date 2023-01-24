@@ -7,6 +7,7 @@ import { Passenger } from 'src/app/models/passenger';
 import { PassengerDTO } from 'src/app/models/passenger-dto';
 import { HeaderService } from 'src/app/service/header.service';
 import { HttpService } from 'src/app/service/http.service';
+import { StorageService } from 'src/app/service/storage.service';
 
 @Component({
   selector: 'app-inscription',
@@ -17,9 +18,10 @@ export class InscriptionComponent implements OnInit {
   form!: FormGroup;
   titre: string = "Inscription sur Uber"
   passager !: PassengerDTO
+  data : any = null
   conducteur !: DriverDTO
   isExist : boolean = false
-  constructor( private headerService : HeaderService,private fb : FormBuilder, private route : Router, private http : HttpService) {
+  constructor( private headerService : HeaderService,private fb : FormBuilder, private route : Router, private http : HttpService, private storageService : StorageService) {
     this.headerService.changeTitre(this.titre)
 
    }
@@ -50,30 +52,60 @@ export class InscriptionComponent implements OnInit {
     return this.form.get("voiture")
   }
 
+    getPassenger(email:string){
+    this.http.getPassagerByEmail(email).subscribe((passager)=>{
+
+         this.storageService.setEmail(passager.email)
+      })
+  }
+
+  getDriver(email:string){
+    this.http.getDriverByEmail(email).subscribe((driver)=>{
+      this.storageService.setEmail(driver.email)
+    })
+  }
+
   submit(){
     if(this.form.valid){
 
       if(this.form.value.type == "passager" ){
-        
-        this.passager =  {
-          email : this.form.value.email
-        }
-        this.http.createPassager(this.passager).subscribe(x =>{
-          console.log(x)
-        })
-        // console.log(this.passager)
-         this.route.navigate(['/acceuil'])
-      } else{
-          this.conducteur =  {
-            email: this.form.value.email,
-            car: this.form.value.voiture
+        this.getPassenger(this.form.value.email)
+        this.data = this.storageService.getEmail();
+        //console.log(this.data)
+        if(this.data == null){
+          this.passager =  {
+            email : this.form.value.email
           }
-          this.http.createDriver(this.conducteur).subscribe(x=>{
+          this.http.createPassager(this.passager).subscribe(x =>{
             console.log(x)
           })
+          // console.log(this.passager)
+          this.storageService.removeEmail()
+           this.route.navigate(['/acceuil'])
+        } else{
+            this.isExist = true
+        }
 
-          // console.log(this.conducteur)
-          this.route.navigate(['/acceuil'])
+      } else{
+          this.getDriver(this.form.value.email)
+          this.data = this.storageService.getEmail()
+          console.log(this.data)
+          if(this.data == null){
+            this.conducteur =  {
+              email: this.form.value.email,
+              car: this.form.value.voiture
+            }
+            this.http.createDriver(this.conducteur).subscribe(x=>{
+              console.log(x)
+            })
+
+            // console.log(this.conducteur)
+            this.storageService.removeEmail()
+            this.route.navigate(['/acceuil'])
+          } else {
+            this.isExist = true
+          }
+
       }
     }
   }
